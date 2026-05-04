@@ -2,8 +2,8 @@ package Tennis;
 
 public class TennisGame1 implements TennisGame {
 
-    private int marcador_j1 = 0;
-    private int marcador_j2 = 0;
+    private int puntosJugador1 = 0;
+    private int puntosJugador2 = 0;
     private String player1Name;
     private String player2Name;
 
@@ -14,36 +14,21 @@ public class TennisGame1 implements TennisGame {
 
     public void wonPoint(String playerName) {
         if (playerName == player1Name)
-            marcador_j1 += 1;
+            puntosJugador1 += 1;
         else
-            marcador_j2 += 1;
+            puntosJugador2 += 1;
     }
 
     public String getScore() {
         String score = "";
         int tempScore=0;
-        if (marcador_j1 == marcador_j2)
+        if (puntosJugador1 == puntosJugador2)
         {
-            switch (marcador_j1)
-            {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
-
-            }
+            score = getString();
         }
-        else if (marcador_j1 >=4 || marcador_j2 >=4)
+        else if (puntosJugador1 >=4 || puntosJugador2 >=4)
         {
-            int minusResult = marcador_j1 - marcador_j2;
+            int minusResult = puntosJugador1 - puntosJugador2;
             if (minusResult==1) score ="Advantage player1";
             else if (minusResult ==-1) score ="Advantage player2";
             else if (minusResult>=2) score = "Win for player1";
@@ -53,8 +38,8 @@ public class TennisGame1 implements TennisGame {
         {
             for (int i=1; i<3; i++)
             {
-                if (i==1) tempScore = marcador_j1;
-                else { score+="-"; tempScore = marcador_j2;}
+                if (i==1) tempScore = puntosJugador1;
+                else { score+="-"; tempScore = puntosJugador2;}
                 switch(tempScore)
                 {
                     case 0:
@@ -71,6 +56,27 @@ public class TennisGame1 implements TennisGame {
                         break;
                 }
             }
+        }
+        return score;
+    }
+
+    private String getString() {
+        String score;
+        switch (puntosJugador1)
+        {
+            case 0:
+                score = "Love-All";
+                break;
+            case 1:
+                score = "Fifteen-All";
+                break;
+            case 2:
+                score = "Thirty-All";
+                break;
+            default:
+                score = "Deuce";
+                break;
+
         }
         return score;
     }
